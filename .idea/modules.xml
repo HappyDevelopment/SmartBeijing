@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SildingMenu/SildingMenu.iml" filepath="$PROJECT_DIR$/SildingMenu/SildingMenu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SmartBeijing.iml" filepath="$PROJECT_DIR$/SmartBeijing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SildingMenu/library/library.iml" filepath="$PROJECT_DIR$/SildingMenu/library/library.iml" />
+    </modules>
+  </component>
+</project>
