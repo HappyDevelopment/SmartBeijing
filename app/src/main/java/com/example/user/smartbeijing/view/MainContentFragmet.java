@@ -13,11 +13,14 @@ import com.example.user.smartbeijing.basepage.HomeBaseTagPager;
 import com.example.user.smartbeijing.basepage.NewCenterBaseTagPager;
 import com.example.user.smartbeijing.basepage.SettingCenterBaseTagPager;
 import com.example.user.smartbeijing.basepage.SmartServiceBaseTagPager;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.id;
 
 /**
  * Describe :  主页面的Fragment
@@ -34,9 +37,62 @@ public class MainContentFragmet extends BaseFragmet {
     @ViewInject(R.id.rg_content_radios)
     private RadioGroup rg_radios;
 
-    //把5个界面的BaseTagPage都添加捡来
+    //把5个界面的BaseTagPage都添加进来
     List<BaseTagPage> pages = new ArrayList<BaseTagPage>();
 
+    //设置当前界面的编号
+    private int selectIndex ;
+
+    /**
+     * 设置点击事件
+     */
+    @Override
+    public void initEvent() {
+        rg_radios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rb_main_content_home:// 主界面
+                    selectIndex = 0;
+                    break;
+                    case R.id.rb_main_content_newscenter:// 新闻中心界面的切换
+                        selectIndex = 1;
+                        break;
+                    case R.id.rb_main_content_smartservice:// 智慧服务面
+                        selectIndex = 2;
+                        break;
+                    case R.id.rb_main_content_govaffairs:// 政务界面
+                        selectIndex = 3;
+                        break;
+                    case R.id.rb_main_content_settingcenter:// 设置中心界面
+                        selectIndex = 4;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                //在做处理
+            }
+        });
+
+    }
+
+    /**
+     * 设置选中的界面
+     */
+    protected void switchPage(){
+        //设置viewPager的显示面
+        viewPagers.setCurrentItem(selectIndex);
+
+        //判断界面是不是123
+        if(selectIndex == 0 | selectIndex == pages.size()-1){
+            //不让左侧菜单话出来
+            mainActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+       }else {
+            mainActivity.getSlidingMenu().setTouchModeAbove((SlidingMenu.TOUCHMODE_FULLSCREEN));
+        }
+    }
     @Override
     public View initView() {
         View root = View.inflate(mainActivity,R.layout.fragment_content_view,null);
@@ -48,6 +104,10 @@ public class MainContentFragmet extends BaseFragmet {
         return root;
     }
 
+    /**
+     * 向主界面的Fragment添加进去各个viewPager的TagPager ,
+     *      传入Context  ， Context是MainActivity
+     */
     @Override
     public void initData() {
 
@@ -64,6 +124,12 @@ public class MainContentFragmet extends BaseFragmet {
 
         MyAdapter adapter = new MyAdapter();
         viewPagers.setAdapter(adapter);
+
+        //设置默认选择首页
+//        switchPage();
+        //设置第一个按钮被选中(首页)
+        rg_radios.check(R.id.rb_main_content_home);
+
 
     }
 

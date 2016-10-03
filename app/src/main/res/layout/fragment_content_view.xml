@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:orientation="vertical" android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <com.example.user.smartbeijing.view.NoScollViewPager
         android:id="@+id/vp_main_content_pages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-    </android.support.v4.view.ViewPager>
-
+    </com.example.user.smartbeijing.view.NoScollViewPager>
     <!-- 屏幕适配问题， 还得我手动向上移45dp..........-->
     <!-- 主题或者样式的问题 ，默认是appTheme 这样适配起来就有问题， 要自己定义一个 -->
     <RadioGroup
