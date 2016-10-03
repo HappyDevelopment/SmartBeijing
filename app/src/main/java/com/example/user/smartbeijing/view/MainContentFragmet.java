@@ -42,7 +42,8 @@ public class MainContentFragmet extends BaseFragmet {
         View root = View.inflate(mainActivity,R.layout.fragment_content_view,null);
 
         //利用xutils 来动态注入view
-        ViewUtils.inject(root);
+        // 换关键的点， 注入的时候(Object handler ，View view)
+        ViewUtils.inject(this,root);
 
         return root;
     }
