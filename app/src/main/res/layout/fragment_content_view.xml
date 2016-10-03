@@ -10,18 +10,20 @@
         android:layout_weight="1">
     </android.support.v4.view.ViewPager>
 
+    <!-- 屏幕适配问题， 还得我手动向上移45dp..........-->
     <RadioGroup
         android:id="@+id/rg_content_radios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
         android:background="@drawable/bottom_tab_bg"
         android:orientation="horizontal">
 
         <!--把RadioButton的共性抽取出来作为样式-->
         <RadioButton
             android:id="@+id/rb_main_content_home"
-            android:drawableTop="@drawable/bottom_tab_bg"
-            style="@style/AlertDialog.AppCompat"
+            android:drawableTop="@drawable/rb_home_selector"
+            style="@style/radioButtonStyle"
             android:text="@string/rb_content_home" />
         <RadioButton
             android:id="@+id/rb_main_content_newscenter"
@@ -38,7 +40,6 @@
         <RadioButton
             android:id="@+id/rb_main_content_govaffairs"
             style="@style/radioButtonStyle"
-
             android:drawableTop="@drawable/rb_govaffairs_selector"
             android:text="@string/rb_main_content_govaffairs" />
 
