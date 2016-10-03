@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main_content_pages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
+
+    <RadioGroup
+        android:id="@+id/rg_content_radios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_tab_bg"
+        android:orientation="horizontal">
+
+        <!--把RadioButton的共性抽取出来作为样式-->
+        <RadioButton
+            android:id="@+id/rb_main_content_home"
+            android:drawableTop="@drawable/bottom_tab_bg"
+            style="@style/AlertDialog.AppCompat"
+            android:text="@string/rb_content_home" />
+        <RadioButton
+            android:id="@+id/rb_main_content_newscenter"
+            style="@style/radioButtonStyle"
+            android:drawableTop="@drawable/rb_newscenter_selector"
+            android:text="@string/rb_content_newsContent" />
+
+        <RadioButton
+            android:id="@+id/rb_main_content_smartservice"
+            style="@style/radioButtonStyle"
+            android:drawableTop="@drawable/rb_smartservice_selector"
+            android:text="@string/rb_main_content_smartservice" />
+
+        <RadioButton
+            android:id="@+id/rb_main_content_govaffairs"
+            style="@style/radioButtonStyle"
+
+            android:drawableTop="@drawable/rb_govaffairs_selector"
+            android:text="@string/rb_main_content_govaffairs" />
+
+        <RadioButton
+            android:id="@+id/rb_main_content_settingcenter"
+            style="@style/radioButtonStyle"
+            android:drawableTop="@drawable/rb_settingcenter_selector"
+            android:text="@string/rb_main_content_settingcenter" />
+
+    </RadioGroup>
+</LinearLayout>
