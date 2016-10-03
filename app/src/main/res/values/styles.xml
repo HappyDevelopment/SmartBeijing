@@ -8,11 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--RadioGroup 主题-->
+    <style name="MyRadioGroupTheme" parent="android:Theme.Light"/>
     <!--RadioButton 的 样式-->
     <style name="radioButtonStyle">
         <item name="android:textColor">@color/rb_selected_colors</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>

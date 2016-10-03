@@ -11,11 +11,12 @@
     </android.support.v4.view.ViewPager>
 
     <!-- 屏幕适配问题， 还得我手动向上移45dp..........-->
+    <!-- 主题或者样式的问题 ，默认是appTheme 这样适配起来就有问题， 要自己定义一个 -->
     <RadioGroup
         android:id="@+id/rg_content_radios"
         android:layout_width="match_parent"
+        style="@style/MyRadioGroupTheme"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
         android:background="@drawable/bottom_tab_bg"
         android:orientation="horizontal">
 
