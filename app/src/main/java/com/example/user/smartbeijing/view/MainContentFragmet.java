@@ -41,20 +41,20 @@ public class MainContentFragmet extends BaseFragmet {
     List<BaseTagPage> pages = new ArrayList<BaseTagPage>();
 
     //设置当前界面的编号
-    private int selectIndex ;
+    private int selectIndex;
 
     /**
-     * 设置点击事件
+     * 设置点击事件， 最终是在 OnActivityCreate()中被调用完成实例化
      */
     @Override
     public void initEvent() {
         rg_radios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rb_main_content_home:// 主界面
-                    selectIndex = 0;
-                    break;
+                        selectIndex = 0;
+                        break;
                     case R.id.rb_main_content_newscenter:// 新闻中心界面的切换
                         selectIndex = 1;
                         break;
@@ -72,68 +72,84 @@ public class MainContentFragmet extends BaseFragmet {
                         break;
                 }
 
-                //在做处理
+                //在做处理，设置123能被点出来
+                switchPage();
             }
         });
+        //还可以调用父类的initView()来看父类做了什么 ， 继承 框架
+        super.initEvent();
+    }
 
+    /**
+     * 左侧菜单点击， 让主页面切换不同的界面
+     *
+     */
+    public void leftMenuClickSwitchPage(int subselectPosition) {
+        BaseTagPage baseTagPage = pages.get(selectIndex);
+        baseTagPage.switchPage(subselectPosition);
     }
 
     /**
      * 设置选中的界面
      */
-    protected void switchPage(){
+    protected void switchPage() {
         //设置viewPager的显示面
         viewPagers.setCurrentItem(selectIndex);
 
         //判断界面是不是123
-        if(selectIndex == 0 | selectIndex == pages.size()-1){
+        if (selectIndex == 0 | selectIndex == pages.size() - 1) {
             //不让左侧菜单话出来
             mainActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-       }else {
+        } else {
             mainActivity.getSlidingMenu().setTouchModeAbove((SlidingMenu.TOUCHMODE_FULLSCREEN));
         }
     }
+
     @Override
     public View initView() {
-        View root = View.inflate(mainActivity,R.layout.fragment_content_view,null);
+        View root = View.inflate(mainActivity, R.layout.fragment_content_view, null);
 
         //利用xutils 来动态注入view
-        // 换关键的点， 注入的时候(Object handler ，View view)
-        ViewUtils.inject(this,root);
+        // 换关键的点， 注入的时候(Object handler ，View view) handler == context
+        ViewUtils.inject(this, root);
 
         return root;
     }
 
     /**
      * 向主界面的Fragment添加进去各个viewPager的TagPager ,
-     *      传入Context  ， Context是MainActivity
+     * 传入Context  ， Context是MainActivity
+     *
+     * 在onActivityCreate()中被调用完成初始化/实例化
      */
     @Override
     public void initData() {
 
         // 首页
         pages.add(new HomeBaseTagPager(mainActivity));
-        // 首页
+        // 新闻中心
         pages.add(new NewCenterBaseTagPager(mainActivity));
-        // 首页
+        // 智慧服务
         pages.add(new SmartServiceBaseTagPager(mainActivity));
-        // 首页
+        // 政务
         pages.add(new GovAffairsBaseTagPager(mainActivity));
-        // 首页
+        // 设置中心
         pages.add(new SettingCenterBaseTagPager(mainActivity));
 
         MyAdapter adapter = new MyAdapter();
         viewPagers.setAdapter(adapter);
 
         //设置默认选择首页
-//        switchPage();
+        switchPage();
         //设置第一个按钮被选中(首页)
         rg_radios.check(R.id.rb_main_content_home);
 
 
     }
 
-    private class MyAdapter extends PagerAdapter{
+
+
+    private class MyAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {

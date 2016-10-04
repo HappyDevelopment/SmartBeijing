@@ -29,6 +29,13 @@ public abstract class BaseFragmet extends Fragment {
         mainActivity = (MainActivity) getActivity();
     }
 
+    /**
+     *  initView() 在 Fragment 的onCreateVIew中完成初始化
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,7 +63,11 @@ public abstract class BaseFragmet extends Fragment {
 
 
     /**
-     * 初始化数据和事件
+     * 秒！！！！！！
+     * 如果有子类实现 initData（）或 initEvent()的话，会在onActivityCreate中调用初始化数据和事件,
+     * 解决了让子类继承Fragment 在 onActivityCreated（）重写方法中写 initData（）或 initEvent()
+     *
+     * 框架的好处啊！！！！！
      * @param savedInstanceState
      */
     @Override
@@ -65,4 +76,6 @@ public abstract class BaseFragmet extends Fragment {
         initData();
         initEvent();
     }
+
+
 }

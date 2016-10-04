@@ -77,7 +77,7 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         //设置滑动出去后剩余空间的大小
-        slidingMenu.setBehindOffset(200);
+        slidingMenu.setBehindOffset(400);
     }
 
     /**
@@ -96,7 +96,7 @@ public class MainActivity extends SlidingFragmentActivity {
      */
     public MainContentFragmet getMainMenuFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        MainContentFragmet mainContentFragmet = (MainContentFragmet) fragmentManager.findFragmentByTag(LEFT_MENU_TAG);
+        MainContentFragmet mainContentFragmet = (MainContentFragmet) fragmentManager.findFragmentByTag(MAIN_MENU_TAG);
         return mainContentFragmet;
     }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical" android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_height="match_parent">
 
     <com.example.user.smartbeijing.view.NoScollViewPager
         android:id="@+id/vp_main_content_pages"
@@ -11,6 +12,8 @@
     </com.example.user.smartbeijing.view.NoScollViewPager>
     <!-- 屏幕适配问题， 还得我手动向上移45dp..........-->
     <!-- 主题或者样式的问题 ，默认是appTheme 这样适配起来就有问题， 要自己定义一个 -->
+    <!-- 上次该主题可以了， 这次又不知怎么变为原来问题了。。。。-->
+    <!--  把 AppTheme 修改了就可以了-->
     <RadioGroup
         android:id="@+id/rg_content_radios"
         android:layout_width="match_parent"

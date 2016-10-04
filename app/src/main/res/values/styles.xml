@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <style name="AppTheme" parent="android:Theme.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,6 +12,7 @@
     <!--RadioGroup 主题-->
     <style name="MyRadioGroupTheme" parent="android:Theme.Light"/>
     <!--RadioButton 的 样式-->
+    <!--@android:color/transparent 为透明度为0 ，防止出现字体是竖着的-->
     <style name="radioButtonStyle">
         <item name="android:textColor">@color/rb_selected_colors</item>
         <item name="android:background">@android:color/transparent</item>
