@@ -30,4 +30,5 @@ dependencies {
     compile project(path: ':xutils_library')
     compile project(path: ':SildingMenu:library')
     compile files('libs/gson-2.2.1.jar')
+    compile project(path: ':viewPageIndicator_library')
 }

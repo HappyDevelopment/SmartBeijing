@@ -63,7 +63,7 @@ public abstract class BaseFragmet extends Fragment {
 
 
     /**
-     * 秒！！！！！！
+     * 妙！！！！！！
      * 如果有子类实现 initData（）或 initEvent()的话，会在onActivityCreate中调用初始化数据和事件,
      * 解决了让子类继承Fragment 在 onActivityCreated（）重写方法中写 initData（）或 initEvent()
      *

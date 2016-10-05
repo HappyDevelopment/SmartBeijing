@@ -2,6 +2,7 @@ package com.example.user.smartbeijing.view;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -41,7 +42,7 @@ public class MainContentFragmet extends BaseFragmet {
     List<BaseTagPage> pages = new ArrayList<BaseTagPage>();
 
     //设置当前界面的编号
-    private int selectIndex;
+    private int selectIndex = 0;
 
     /**
      * 设置点击事件， 最终是在 OnActivityCreate()中被调用完成实例化
@@ -71,7 +72,6 @@ public class MainContentFragmet extends BaseFragmet {
                     default:
                         break;
                 }
-
                 //在做处理，设置123能被点出来
                 switchPage();
             }
@@ -99,6 +99,7 @@ public class MainContentFragmet extends BaseFragmet {
         //判断界面是不是123
         if (selectIndex == 0 | selectIndex == pages.size() - 1) {
             //不让左侧菜单话出来
+
             mainActivity.getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
         } else {
             mainActivity.getSlidingMenu().setTouchModeAbove((SlidingMenu.TOUCHMODE_FULLSCREEN));
@@ -153,28 +154,35 @@ public class MainContentFragmet extends BaseFragmet {
 
         @Override
         public int getCount() {
-            // TODO Auto-generated method stub
             return pages.size();
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            // TODO Auto-generated method stub
+            //要展示的内容
             BaseTagPage baseTagPage = pages.get(position);
+            //得到  5 个 页面的view
             View root = baseTagPage.getRoot();
+            // 添加到 ViewGroup (ViewPager)中
             container.addView(root);
+
+            // 发现有错误， 一直加载不了数据， 原因是这里的adapter没有加载数据，
+            //  以为是BaseTagPage中没有加载数据
+            // 之前这是demo， 所以没有注意到这个事情，  现在要改， 改变数据适配啊
+            //加载数据库 ，
+            baseTagPage.initData();
+
+            //把 view返回
             return root;
         }
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            // TODO Auto-generated method stub
             return view == object;
         }
 
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            // TODO Auto-generated method stub
             container.removeView((View) object);
         }
 

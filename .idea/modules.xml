@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/SmartBeijing.iml" filepath="$PROJECT_DIR$/SmartBeijing.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/SildingMenu/library/library.iml" filepath="$PROJECT_DIR$/SildingMenu/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/viewPageIndicator_library/viewPageIndicator_library.iml" filepath="$PROJECT_DIR$/viewPageIndicator_library/viewPageIndicator_library.iml" />
       <module fileurl="file://$PROJECT_DIR$/xutils_library/xutils_library.iml" filepath="$PROJECT_DIR$/xutils_library/xutils_library.iml" />
     </modules>
   </component>

@@ -112,7 +112,7 @@ System.out: com.example.user.smartbeijing.newsCenterPage.InteractBaseNewsCenterP
             BaseNewsCenterPage baseNewsCenterPage = null;
 
             switch (data.type) {
-                case 1:// 新闻页面
+                case 1:// 新闻页面 ，把数据传给它的构造函数
                     baseNewsCenterPage = new NewsBaseNewsCenterPage(mainActivity, newsContentData.data.get(0).children);
                     //最好还是用Log来打印信息
                     System.out.println(baseNewsCenterPage.toString() + "------0");
@@ -163,6 +163,10 @@ System.out: com.example.user.smartbeijing.newsCenterPage.InteractBaseNewsCenterP
         fl_content.removeAllViews();
 
         //初始化数据
+        // 这一步很关键， 数据的初始化都是在这里被调用的
+
+// ！！！要明白这一步是做什么的， 时刻有个清醒的头脑 ， 为什么要有这一步
+
         baseNewsCenterPage.initData();
 
         //显示到 FragmentLayout中

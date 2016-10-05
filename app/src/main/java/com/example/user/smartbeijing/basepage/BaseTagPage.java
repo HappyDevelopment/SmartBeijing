@@ -23,7 +23,6 @@ public class BaseTagPage
 	public BaseTagPage(MainActivity context){
 		this.mainActivity = context;
 		initView();//初始化布局
-		initData();
 		initEvent();
 	}
 
@@ -53,6 +52,10 @@ public class BaseTagPage
 
 	/**
 	 * 此方法在页面数据显示的时候在调用
+	 *
+	 * 昨天的错误， 因为我在BaseTagPage的构造函数中使用了 InitData()方法，
+	 * 				所以类一加载就初始化数据，    naive
+	 * 			 网络数据是很耗时的啊， 不能这么做啊 ，  兄弟啊 ， 要知道自己在干什么啊
 	 */
 	public void initData(){
 		

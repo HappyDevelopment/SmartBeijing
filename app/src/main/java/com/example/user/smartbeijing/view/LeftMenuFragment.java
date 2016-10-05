@@ -90,14 +90,23 @@ public class LeftMenuFragment extends BaseFragmet {
  */
 // 方案一：              mainActivity.getMainMenuFragment().leftMenuClickSwitchPage(selectPosition);
 
-                //方案二   接口回调    nice
+
+//方案二   接口回调       switchPageListener.switchPage(selectPosition);
+
+
+//总方案， 因为第一次的时候还没有接口， 所以接口回调方法是实现不了的， ， 要这么来
+
+                if (switchPageListener != null) {
                     switchPageListener.switchPage(selectPosition);
+                } else {
+                    mainActivity.getMainMenuFragment().leftMenuClickSwitchPage(selectPosition);
+                }
 
-
-                    mainActivity.getSlidingMenu().toggle();
+                //切换开关
+                mainActivity.getSlidingMenu().toggle();
             }
         });
-
+        super.initEvent();
     }
 
     /**
@@ -128,7 +137,7 @@ public class LeftMenuFragment extends BaseFragmet {
         lv_leftData.setDividerHeight(0);
 
         //距顶部为45px
-        lv_leftData.setPadding(0, 45, 0, 0);
+        lv_leftData.setPadding(0, 60, 0, 0);
 
         //Fragment的createView() 要把创建好的view返回
         return lv_leftData;
@@ -140,7 +149,7 @@ public class LeftMenuFragment extends BaseFragmet {
         //组织数据
         adapter = new MyAdapter();
         lv_leftData.setAdapter(adapter);
-
+        super.initData();
     }
 
     private class MyAdapter extends BaseAdapter {
