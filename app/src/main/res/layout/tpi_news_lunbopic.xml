@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--使用绝对布局来控制 viewPager的大小 不太好吧？  还行？-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 最外层套一个RelativeLayout这样才能显示好   没有套的话，控件没有在一起 -->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="175dp">
+
+        <!-- 拦截事件的viewPager-->
+        <com.example.user.smartbeijing.view.interceptScrollViewpager
+            android:id="@+id/vp_tpi_news_lunbo_pic"
+            android:layout_width="fill_parent"
+            android:layout_height="175dp">
+
+        </com.example.user.smartbeijing.view.interceptScrollViewpager>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#44000000">
+
+            <TextView
+                android:id="@+id/tv_tpi_news_pic_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:text="####" />
+
+            <LinearLayout
+                android:id="@+id/ll_tpi_news_pic_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:paddingRight="8dip">
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

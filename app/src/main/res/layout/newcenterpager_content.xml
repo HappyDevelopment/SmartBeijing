@@ -3,12 +3,32 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.viewpagerindicator.TabPageIndicator
-        android:id="@+id/newcenter_tpi"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <!--现在需要添加一个箭头，能点击滑动到下一个-->
+    <!-- LinearLayout 框架，页签和imageButton来分区域-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.viewpagerindicator.TabPageIndicator
+            android:id="@+id/newcenter_tpi"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/newscenter_ib_nextpage"
+            android:src="@drawable/news_cate_arr"
+            android:layout_gravity="center_vertical"
+            android:background="#00000000"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
+        style="@android:style/Animation.Dialog"
         android:id="@+id/newcenter_vp"
         android:layout_width="fill_parent"
         android:layout_height="0dp"

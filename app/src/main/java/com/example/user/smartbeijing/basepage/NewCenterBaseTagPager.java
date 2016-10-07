@@ -1,6 +1,8 @@
 package com.example.user.smartbeijing.basepage;
 
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -8,12 +10,13 @@ import java.util.List;
 
 import com.example.user.smartbeijing.activity.MainActivity;
 import com.example.user.smartbeijing.domain.NewsContentData;
-import com.example.user.smartbeijing.newsCenterPage.BaseNewsCenterPage;
-import com.example.user.smartbeijing.newsCenterPage.InteractBaseNewsCenterPage;
-import com.example.user.smartbeijing.newsCenterPage.NewsBaseNewsCenterPage;
-import com.example.user.smartbeijing.newsCenterPage.PhotosBaseNewsCenterPage;
-import com.example.user.smartbeijing.newsCenterPage.TopicBaseNewsCenterPage;
+import com.example.user.smartbeijing.newscenterpage.BaseNewsCenterPage;
+import com.example.user.smartbeijing.newscenterpage.InteractBaseNewsCenterPage;
+import com.example.user.smartbeijing.newscenterpage.NewsBaseNewsCenterPage;
+import com.example.user.smartbeijing.newscenterpage.PhotosBaseNewsCenterPage;
+import com.example.user.smartbeijing.newscenterpage.TopicBaseNewsCenterPage;
 import com.example.user.smartbeijing.utils.MyConstans;
+import com.example.user.smartbeijing.utils.SpTools;
 import com.example.user.smartbeijing.view.LeftMenuFragment;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
@@ -34,6 +37,7 @@ public class NewCenterBaseTagPager extends BaseTagPage {
     private List<BaseNewsCenterPage> newsCenterPages = new ArrayList<BaseNewsCenterPage>();
     // 要展示的数据bean
     private NewsContentData newsContentData;
+    private Gson gson;
 
     public NewCenterBaseTagPager(MainActivity context) {
         super(context);
@@ -45,6 +49,17 @@ public class NewCenterBaseTagPager extends BaseTagPage {
      */
     @Override
     public void initData() {
+
+        // 0 添加本地数据缓冲的方法
+        //最后一个值为空也行， null 也行 ， 只是得到value
+        String jsonCache = SpTools.getString(mainActivity, MyConstans.NEWSCENTERURL, "");
+
+        if (! TextUtils.isEmpty(jsonCache)) {
+            //从本地获取数据
+            parseData(jsonCache);
+        }
+
+
         //1 , 从网络上获取数据
         HttpUtils httpUtils = new HttpUtils();
         httpUtils.send(HttpRequest.HttpMethod.GET, MyConstans.NEWSCENTERURL,
@@ -72,11 +87,18 @@ public class NewCenterBaseTagPager extends BaseTagPage {
     /**
      * 解析json 数据  ， 传递到 LeftMenuFragment数据 ， 根据为不同显示不同的界面
      *
-     * @param jsonData 从网络上后去的json数据
+     * 本地的或者网络上的数据都调用这个方法，  没事 ， 会刷新到最新
+     *      他这个逻辑不好
+     *
+     * @param jsonData 从网络上后去的json数据  或者是 本地的数据
      */
     private void parseData(String jsonData) {
-        // Google 提供的 json解析器
-        Gson gson = new Gson();
+
+        // 把gson 变为成员变量，防止过多的实例化
+        if( gson == null){
+            gson = new Gson();
+        }
+
         //开始解析 , 得到解析后的对象
         newsContentData = gson.fromJson(jsonData, NewsContentData.class);
 
@@ -88,6 +110,7 @@ public class NewCenterBaseTagPager extends BaseTagPage {
         mainActivity.getLeftMenuFragment().setOnSwitchPageListener(new LeftMenuFragment.OnSwitchPageListener() {
             @Override
             public void switchPage(int selectionIndex) {
+                Log.i("OnSwitchPageListener","接口实现SwitchPage");
                 NewCenterBaseTagPager.this.switchPage(selectionIndex);
             }
         });

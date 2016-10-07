@@ -35,4 +35,29 @@ public class SpTools {
         SharedPreferences sp = context.getSharedPreferences(MyConstans.CONFIGFILE, Context.MODE_PRIVATE);
         return sp.getBoolean(key, defValue);
     }
+
+    /**
+     * @param key
+     *        关键字
+     * @param value
+     *       对应的值
+     */
+    public static void setString(Context context,String key,String value){
+        SharedPreferences sp = context.getSharedPreferences(MyConstans.CONFIGFILE, Context.MODE_PRIVATE);
+        sp.edit().putString(key, value).commit();//提交保存键值对
+
+    }
+
+    /**
+     * @param context
+     * @param key
+     *        关键字
+     * @param defValue
+     *        设置的默认值
+     * @return
+     */
+    public static String getString(Context context,String key,String defValue){
+        SharedPreferences sp = context.getSharedPreferences(MyConstans.CONFIGFILE, Context.MODE_PRIVATE);
+        return sp.getString(key, defValue);
+    }
 }

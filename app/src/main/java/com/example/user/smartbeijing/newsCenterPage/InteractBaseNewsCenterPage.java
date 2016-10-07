@@ -1,4 +1,4 @@
-package com.example.user.smartbeijing.newsCenterPage;
+package com.example.user.smartbeijing.newscenterpage;
 
 import android.view.Gravity;
 import android.view.View;
