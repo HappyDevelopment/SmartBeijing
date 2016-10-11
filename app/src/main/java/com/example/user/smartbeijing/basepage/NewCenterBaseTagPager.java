@@ -68,7 +68,6 @@ public class NewCenterBaseTagPager extends BaseTagPage {
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         // 数据访问成功
                         String jsonData = responseInfo.result;
-                        System.out.println(jsonData);
                         // 解析json数据
                         parseData(jsonData);
 
@@ -138,25 +137,20 @@ System.out: com.example.user.smartbeijing.newsCenterPage.InteractBaseNewsCenterP
                 case 1:// 新闻页面 ，把数据传给它的构造函数
                     baseNewsCenterPage = new NewsBaseNewsCenterPage(mainActivity, newsContentData.data.get(0).children);
                     //最好还是用Log来打印信息
-                    System.out.println(baseNewsCenterPage.toString() + "------0");
                     break;
                 case 10:// 专题页面
                     baseNewsCenterPage = new TopicBaseNewsCenterPage(mainActivity);
-                    System.out.println(baseNewsCenterPage.toString() + "--------1");
                     break;
                 case 2:// 组图页面
                     baseNewsCenterPage = new PhotosBaseNewsCenterPage(mainActivity);
-                    System.out.println(baseNewsCenterPage.toString() + "-----------2");
                     System.out.println();
                     break;
                 case 3:// 互动页面
                     baseNewsCenterPage = new InteractBaseNewsCenterPage(mainActivity);
-                    System.out.println(baseNewsCenterPage.toString() + "------------3");
                     System.out.println();
                     break;
 
                 default:
-                    System.out.println(baseNewsCenterPage.toString() + "--------------4");
                     break;
             }
 

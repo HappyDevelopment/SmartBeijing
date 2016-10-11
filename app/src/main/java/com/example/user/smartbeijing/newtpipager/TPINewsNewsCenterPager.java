@@ -21,6 +21,7 @@ import com.example.user.smartbeijing.domain.TpiNewsData;
 import com.example.user.smartbeijing.utils.DensityUtil;
 import com.example.user.smartbeijing.utils.MyConstans;
 import com.example.user.smartbeijing.utils.SpTools;
+import com.example.user.smartbeijing.view.RefreshListView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -45,7 +46,7 @@ import static android.R.id.list;
  */
 
 public class TPINewsNewsCenterPager {
-    private View rootView;
+    private View         rootView;
     private MainActivity mainActivity;
 
     //找到所有组件并添加进来
@@ -59,28 +60,30 @@ public class TPINewsNewsCenterPager {
     private LinearLayout ll_points;//轮播图的每张图片对应的点组合
 
     @ViewInject(R.id.lv_tpi_news_listnews)
-    private ListView lv_listnews;// 显示列表新闻的组件
 
-    private Gson gson;
-    private BitmapUtils bitmapUtils;
+    // 基本的listview 不能满足我们的要求， 我们要自定义可以刷新的listview
+    private RefreshListView                      lv_listnews;// 显示列表新闻的组件
+    private Gson                                 gson;
+    private BitmapUtils                          bitmapUtils;
     private NewsContentData.NewsData.ViewTagData viewTagData;
 
     //新闻列表的数据, 这名字绕来绕去的 。。。。。
     private List<TpiNewsData.TPINewsData_Data.TPINewsData_Data_LunBoData> lunboDatas =
             new ArrayList<TpiNewsData.TPINewsData_Data.TPINewsData_Data_LunBoData>();
-    private int picSelectIndex;
+    private int          picSelectIndex;
     private LunboAdapter lunboAdapter;
-    private LunboTask lunboTask;
+    private LunboTask    lunboTask;
 
     //新闻列表的数据
     private List<TpiNewsData.TPINewsData_Data.TPINewsData_Data_ListNewsData> listNews = new ArrayList<TpiNewsData.TPINewsData_Data.TPINewsData_Data_ListNewsData>();
     private ListNewsAdapter listNewsAdapter;
-    private View rootView1;
-    private View lunBoPic;
+    private View            rootView1;
+    private View            lunBoPic;
+    private boolean isFresh;
 
 
     public TPINewsNewsCenterPager(MainActivity mainActivity,
-                                  NewsContentData.NewsData.ViewTagData viewTagData) {
+            NewsContentData.NewsData.ViewTagData viewTagData) {
 
         this.mainActivity = mainActivity;
         this.viewTagData = viewTagData;
@@ -94,7 +97,8 @@ public class TPINewsNewsCenterPager {
     }
 
     private void initEVent() {
-        //给轮播图添加页面切换时间
+
+        //给轮播图添加页面切换事件
         vp_lunbo.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -112,6 +116,19 @@ public class TPINewsNewsCenterPager {
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+
+        // 给listView添加刷新数据事件
+        lv_listnews.setOnRefreshDataListener(new RefreshListView.OnRefreshDataListener() {
+            @Override
+            public void refreshData() {
+                //刷新状态变为正在刷新
+                isFresh = true;
+                //刷新数据
+                getDataFromNet();
+
+                //刷新完， 改变listview的状态
             }
         });
     }
@@ -287,8 +304,8 @@ public class TPINewsNewsCenterPager {
     //装载组件的holder
     private class ViewHolder {
         ImageView iv_newspic;
-        TextView tv_title;
-        TextView tv_time;
+        TextView  tv_title;
+        TextView  tv_time;
         ImageView iv_icon;
     }
 
@@ -313,7 +330,7 @@ public class TPINewsNewsCenterPager {
         // 把 Viewpager 当做listview中的第一个添加进来， 这样就能一起滑动了
 
         //把轮播图加到listView中
-        lv_listnews.addHeaderView(lunBoPic);
+        lv_listnews.addLunboView(lunBoPic);
     }
 
     public View getRootView() {
@@ -338,6 +355,12 @@ public class TPINewsNewsCenterPager {
                         TpiNewsData newsData = parseJson(jsonData);
                         //处理数据
                         ProcessData(newsData);
+
+                        // 在一个判断， 是否是刷新获得的数据
+                        if(isFresh){
+                            lv_listnews.refreshStateFinish();
+                            Toast.makeText(mainActivity, "刷新数据成功", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
