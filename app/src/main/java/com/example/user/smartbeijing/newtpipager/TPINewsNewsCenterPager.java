@@ -130,6 +130,24 @@ public class TPINewsNewsCenterPager {
 
                 //刷新完， 改变listview的状态
             }
+
+            @Override
+            public void loadingMore() {
+
+                //判断是否有更多的数据
+                if(TextUtils.isEmpty(MyConstans.SERVERURL + viewTagData.url)) {
+                    Toast.makeText(mainActivity, "没有更多数据", Toast.LENGTH_LONG).show();
+                    //关闭刷新数据的状态
+                    lv_listnews.refreshStateFinish();
+                } else {
+                    System.out.println("url:" + MyConstans.SERVERURL + viewTagData.url);
+                    System.out.println(MyConstans.SERVERURL + viewTagData.url);
+                    Toast.makeText(mainActivity, (MyConstans.SERVERURL + viewTagData.url), Toast.LENGTH_SHORT).show();
+                    //有数据
+                    getDataFromNet();
+                }
+
+            }
         });
     }
 
@@ -328,9 +346,9 @@ public class TPINewsNewsCenterPager {
         ViewUtils.inject(this, rootView);
 
         // 把 Viewpager 当做listview中的第一个添加进来， 这样就能一起滑动了
-
+        lv_listnews.setIsRefreshHead(true);
         //把轮播图加到listView中
-        lv_listnews.addLunboView(lunBoPic);
+        lv_listnews.addHeaderView(lunBoPic);
     }
 
     public View getRootView() {
@@ -413,6 +431,7 @@ public class TPINewsNewsCenterPager {
 
             //图片的url
             String topimageurl = lunBoData.topimage;
+
 
             //把URL的图片给iv_lunbo_pic
             bitmapUtils.display(iv_lunbo_pic, topimageurl);

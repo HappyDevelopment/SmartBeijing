@@ -1,10 +1,8 @@
 package com.example.user.smartbeijing.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.example.user.smartbeijing.R;
@@ -81,7 +79,8 @@ public class MainActivity extends SlidingFragmentActivity {
     }
 
     /**
-     *  可以让组件（架构层）之间访问容器
+     * 可以让组件（架构层）之间访问容器
+     *
      * @return
      */
     public LeftMenuFragment getLeftMenuFragment() {
@@ -91,7 +90,8 @@ public class MainActivity extends SlidingFragmentActivity {
     }
 
     /**
-     *  可以让组件（架构层）之间访问容器
+     * 可以让组件（架构层）之间访问容器
+     *
      * @return
      */
     public MainContentFragmet getMainMenuFragment() {

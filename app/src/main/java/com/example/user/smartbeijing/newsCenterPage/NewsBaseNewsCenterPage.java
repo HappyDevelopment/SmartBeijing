@@ -140,6 +140,8 @@ public class NewsBaseNewsCenterPage extends BaseNewsCenterPage {
             textView.setGravity(Gravity.CENTER);*/
 
             //现在要根据传入的数据展示具体所需要的内容了
+            // 这是一个 自定义可刷新的viewPager
+ //  一环套一环的 开发  ！！！！！！！！！  层层布局
             TPINewsNewsCenterPager tpipager = new TPINewsNewsCenterPager(mainActivity,viewTagDatas.get(position));
             View rootView = tpipager.getRootView();
 
